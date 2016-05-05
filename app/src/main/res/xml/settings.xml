@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+        android:title="Output Path"
+        android:summary="Set storage path for the recording."
+        android:key="prefPath">
+    </Preference>
+
+    <PreferenceCategory android:title="VIDEO SETTINGS" >
+        <ListPreference
+            android:title="Output Format"
+            android:summary="Specify output video format."
+            android:key="prefOutput"
+            android:entries="@array/format"
+            android:entryValues="@array/formatValues" />
+
+        <ListPreference
+            android:title="Encoding Bitrate"
+            android:summary="Set encoding bitrate (in kbps)."
+            android:key="prefBitrate"
+            android:entries="@array/bitrate"
+            android:entryValues="@array/bitrateValues" />
+
+        <ListPreference
+            android:title="Frame Rate"
+            android:summary="Set frame rate."
+            android:key="prefFrameRate"
+            android:entries="@array/framerate"
+            android:entryValues="@array/framerateValues" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="AUDIO SETTINGS" >
+        <ListPreference
+            android:title="Audio Encoder"
+            android:summary="Specify audio encoder."
+            android:key="prefAudio"
+            android:entries="@array/audio"
+            android:entryValues="@array/audioValues" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="RESET">
+        <Preference
+            android:title="Reset Settings"
+            android:summary="Tap for default settings."
+            android:key="prefClear"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

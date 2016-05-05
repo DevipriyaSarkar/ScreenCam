@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="format">
+        <item>AAC ADTS file format</item>
+        <item>AMR NB file format</item>
+        <item>AMR WB file format</item>
+        <item>MPEG4 media file format</item>
+        <item>3GPP media file format</item>
+        <item>VP8/VORBIS data in a WEBM container</item>
+    </string-array>
+
+    <string-array name="formatValues">
+        <item>AAC_ADTS</item>
+        <item>AMR_NB</item>
+        <item>AMR_WB</item>
+        <item>MPEG_4</item>
+        <item>THREE_GPP</item>
+        <item>WEBM</item>
+    </string-array>
+
+    <string-array name="bitrate">
+        <item>Recommended for screen casting</item>
+        <item>Recommended for fast action</item>
+        <item>200</item>
+        <item>300</item>
+        <item>400</item>
+        <item>500</item>
+        <item>600</item>
+        <item>700</item>
+        <item>800</item>
+        <item>900</item>
+    </string-array>
+
+    <string-array name="bitrateValues">
+        <item>260</item>
+        <item>800</item>
+        <item>200</item>
+        <item>300</item>
+        <item>400</item>
+        <item>500</item>
+        <item>600</item>
+        <item>700</item>
+        <item>800</item>
+        <item>900</item>
+    </string-array>
+
+    <string-array name="framerate">
+        <item>4 (Recommended)</item>
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+    </string-array>
+
+    <string-array name="framerateValues">
+        <item>4</item>
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+    </string-array>
+
+    <string-array name="audio">
+        <item>AAC Low Complexity (AAC-LC) audio codec</item>
+        <item>Enhanced Low Delay AAC (AAC-ELD) audio codec</item>
+        <item>AMR (Narrowband) audio codec</item>
+        <item>AMR (Wideband) audio codec</item>
+        <item>High Efficiency AAC (HE-AAC) audio codec</item>
+        <item>Ogg Vorbis audio codec</item>
+    </string-array>
+
+    <string-array name="audioValues">
+        <item>AAC</item>
+        <item>AAC_ELD</item>
+        <item>AMR_NB</item>
+        <item>AMR_WB</item>
+        <item>HE_AAC</item>
+        <item>VORBIS</item>
+    </string-array>
+
+</resources>
