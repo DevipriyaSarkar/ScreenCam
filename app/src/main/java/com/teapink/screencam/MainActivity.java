@@ -27,7 +27,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -50,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private MediaProjectionCallback mMediaProjectionCallback;
     private ToggleButton mToggleButton;
     private MediaRecorder mMediaRecorder;
-    Toolbar toolbar;
-    TextView textView;
+    private TextView textView;
 
     int hasPermissionStorage;
     int hasPermissionAudio;
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -106,10 +105,20 @@ public class MainActivity extends AppCompatActivity {
         mProjectionManager = (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
 
         mToggleButton = (ToggleButton) findViewById(R.id.toggle);
-        mToggleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onToggleScreenShare(v);
+        mToggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // The toggle is enabled
+                    shareScreen();
+                } else {
+                    // The toggle is disabled
+                    mMediaRecorder.stop();
+                    mMediaRecorder.reset();
+                    Log.v(TAG, "Recording Stopped");
+                    stopScreenSharing();
+                    //initRecorder();
+                    //prepareRecorder();
+                }
             }
         });
 
@@ -155,19 +164,6 @@ public class MainActivity extends AppCompatActivity {
         mMediaProjection.registerCallback(mMediaProjectionCallback, null);
         mVirtualDisplay = createVirtualDisplay();
         mMediaRecorder.start();
-    }
-
-    public void onToggleScreenShare(View view) {
-        if (((ToggleButton) view).isChecked()) {
-            shareScreen();
-        } else {
-            mMediaRecorder.stop();
-            mMediaRecorder.reset();
-            Log.v(TAG, "Recording Stopped");
-            stopScreenSharing();
-            //initRecorder();
-            //prepareRecorder();
-        }
     }
 
     private void shareScreen() {
@@ -217,10 +213,7 @@ public class MainActivity extends AppCompatActivity {
     private void prepareRecorder() {
         try {
             mMediaRecorder.prepare();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-            finish();
-        } catch (IOException e) {
+        } catch (IllegalStateException | IOException e) {
             e.printStackTrace();
             finish();
         }
