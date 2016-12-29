@@ -18,8 +18,8 @@ import static com.teapink.screencam.FilePath.getPath;
 
 public class UserSettings extends PreferenceActivity {
 
-    static SharedPreferences spSettings;
-    static SharedPreferences.Editor editSettings;
+    private static SharedPreferences spSettings;
+    private static SharedPreferences.Editor editSettings;
     private static final int RQS_OPEN_DOCUMENT_TREE = 2;
 
     @Override
@@ -46,8 +46,8 @@ public class UserSettings extends PreferenceActivity {
                     return false;
                 }
             });
-            path.setSummary("Set storage path for the recording.\n" +
-                    "Currently allows paths that are in \n" + Environment.getExternalStorageDirectory().getPath() + " only.");
+            path.setSummary(String.format(getString(R.string.path_storage_instruction_text),
+                    Environment.getExternalStorageDirectory().getPath()));
 
             //confirm and clear all user data
             Preference prefClear = findPreference("prefClear");
@@ -56,9 +56,9 @@ public class UserSettings extends PreferenceActivity {
                 public boolean onPreferenceClick(Preference preference) {
 
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-                    builder1.setTitle("RESET");
+                    builder1.setTitle(R.string.reset_dialog_title);
                     builder1.setCancelable(true);
-                    builder1.setPositiveButton("Yes",
+                    builder1.setPositiveButton(R.string.reset_dialog_positive_button_text,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     //clear all shared preferences files
@@ -66,11 +66,13 @@ public class UserSettings extends PreferenceActivity {
                                     editSettings.clear();
                                     editSettings.apply();
 
-                                    Toast.makeText(getActivity(), "Okay, done.", Toast.LENGTH_SHORT).show();
-                                    getFragmentManager().beginTransaction().replace(android.R.id.content, new UserSettingsFragment()).commit();
+                                    Toast.makeText(getActivity(), R.string.reset_dialog_success_text,
+                                            Toast.LENGTH_SHORT).show();
+                                    getFragmentManager().beginTransaction().replace(android.R.id.content,
+                                            new UserSettingsFragment()).commit();
                                 }
                             });
-                    builder1.setNegativeButton("No",
+                    builder1.setNegativeButton(R.string.reset_dialog_negative_button_text,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     //don't do anything

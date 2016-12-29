@@ -9,10 +9,8 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
-/**
- * Created by Devipriya on 24-Dec-15.
- */
-public class FilePath {
+
+class FilePath {
 
     public static String getPath(final Context context, final Uri uri) {
 
@@ -84,8 +82,8 @@ public class FilePath {
      * @param selectionArgs (Optional) Selection arguments used in the query.
      * @return The value of the _data column, which is typically a file path.
      */
-    public static String getDataColumn(Context context, Uri uri, String selection,
-                                       String[] selectionArgs) {
+    private static String getDataColumn(Context context, Uri uri, String selection,
+                                        String[] selectionArgs) {
 
         Cursor cursor = null;
         final String column = "_data";
@@ -112,7 +110,7 @@ public class FilePath {
      * @param uri The Uri to check.
      * @return Whether the Uri authority is ExternalStorageProvider.
      */
-    public static boolean isExternalStorageDocument(Uri uri) {
+    private static boolean isExternalStorageDocument(Uri uri) {
         return "com.android.externalstorage.documents".equals(uri.getAuthority());
     }
 
@@ -120,7 +118,7 @@ public class FilePath {
      * @param uri The Uri to check.
      * @return Whether the Uri authority is DownloadsProvider.
      */
-    public static boolean isDownloadsDocument(Uri uri) {
+    private static boolean isDownloadsDocument(Uri uri) {
         return "com.android.providers.downloads.documents".equals(uri.getAuthority());
     }
 
@@ -128,41 +126,8 @@ public class FilePath {
      * @param uri The Uri to check.
      * @return Whether the Uri authority is MediaProvider.
      */
-    public static boolean isMediaDocument(Uri uri) {
+    private static boolean isMediaDocument(Uri uri) {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
     }
-
-
-
-
-
-
-/*    //raghava
-    private String findStoragePath(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        if (preferences.getString("filePath",null)!=null&&(new File(preferences.getString("filePath",null)).exists()))
-            return preferences.getString("filePath",null);
-        else{
-            if(Environment.isExternalStorageEmulated()){
-                if(System.getenv("ANDROID_STORAGE")!=null&&(new File(System.getenv("ANDROID_STORAGE")).exists()))
-                    return System.getenv("ANDROID_STORAGE");
-                else if(System.getenv("SECONDARY_STORAGE")!=null&&(new File(System.getenv("SECONDARY_STORAGE")).exists()))
-                {if(new File(System.getenv("SECONDARY_STORAGE")).getParent()!=null)
-                    return new File(System.getenv("SECONDARY_STORAGE")).getParent();
-                else
-                    return System.getenv("SECONDARY_STORAGE");}
-                else
-                {if(new File(Environment.getExternalStorageDirectory().getParent()).exists())
-                    return Environment.getExternalStorageDirectory().getParent();
-                else
-                    return Environment.getExternalStorageDirectory().getAbsolutePath();}
-            }
-            else
-            {if(new File(Environment.getExternalStorageDirectory().getParent()).exists())
-                return Environment.getExternalStorageDirectory().getParent();
-            else
-                return Environment.getExternalStorageDirectory().getAbsolutePath();}
-
-        }}*/
 
 }

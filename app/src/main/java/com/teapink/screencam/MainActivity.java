@@ -39,7 +39,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private final String TAG = this.getClass().getSimpleName();
     private static final int PERMISSION_CODE = 1;
     private int mScreenDensity;
     private MediaProjectionManager mProjectionManager;
@@ -52,10 +52,10 @@ public class MainActivity extends AppCompatActivity {
     private MediaRecorder mMediaRecorder;
     private TextView textView;
 
-    int hasPermissionStorage;
-    int hasPermissionAudio;
+    private int hasPermissionStorage;
+    private int hasPermissionAudio;
     private static final int REQUEST_CODE_SOME_FEATURES_PERMISSIONS = 20;
-    List<String> permissions = new ArrayList<>();
+    private List<String> permissions = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         if (resultCode != RESULT_OK) {
-            Toast.makeText(this, "Screen Cast Permission Denied", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.screen_cast_permission_denied_error, Toast.LENGTH_SHORT).show();
             mToggleButton.setChecked(false);
             mMediaRecorder.reset();
             textView.setText("");
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private VirtualDisplay createVirtualDisplay() {
-        return mMediaProjection.createVirtualDisplay("MainActivity",
+        return mMediaProjection.createVirtualDisplay(TAG,
                 DISPLAY_WIDTH, DISPLAY_HEIGHT, mScreenDensity,
                 DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
                 mMediaRecorder.getSurface(), null /*Callbacks*/, null /*Handler*/);
@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
         String audio = sp.getString("prefAudio", "AAC");
         String ext;
 
-        textView.setText("Current path: " + path);
+        textView.setText(String.format(getString(R.string.current_storage_path_text), path));
 
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE);
@@ -323,14 +323,14 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_about:
                 new AlertDialog.Builder(this)
-                        .setTitle("ABOUT")
-                        .setMessage("Hey... Devipriya here!")
-                        .setPositiveButton("Okay!", new DialogInterface.OnClickListener() {
+                        .setTitle(getString(R.string.about_dialog_title))
+                        .setMessage(getString(R.string.about_dialog_message))
+                        .setPositiveButton(getString(R.string.about_dialog_positive_button_text),
+                                new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 //continue
                             }
                         })
-                        .setIcon(android.R.drawable.ic_menu_gallery)
                         .show();
                 return true;
             default:
@@ -341,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int grantResults[]) {
-        switch ( requestCode ) {
+        switch (requestCode) {
             case REQUEST_CODE_SOME_FEATURES_PERMISSIONS: {
                 for( int i = 0; i < permissions.length; i++ ) {
                     if( grantResults[i] == PackageManager.PERMISSION_GRANTED ) {

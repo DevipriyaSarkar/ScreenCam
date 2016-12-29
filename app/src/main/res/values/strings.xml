@@ -6,5 +6,15 @@
     <string name="status">Recording Status:</string>
     <string name="toggleButton">Start</string>
     <string name="title_user_settings">Settings</string>
+    <string name="screen_cast_permission_denied_error">Screen Cast Permission Denied</string>
+    <string name="current_storage_path_text">Current path: %s</string>
+    <string name="about_dialog_title">About</string>
+    <string name="about_dialog_message">App by Devipriya Sarkar.</string>
+    <string name="about_dialog_positive_button_text">Okay!</string>
+    <string name="path_storage_instruction_text">Set storage path for the recording.\nCurrently allows paths that are in \n%s only.</string>
+    <string name="reset_dialog_title">Reset</string>
+    <string name="reset_dialog_positive_button_text">Yes</string>
+    <string name="reset_dialog_negative_button_text">No</string>
+    <string name="reset_dialog_success_text">Okay, done.</string>
 
 </resources>
