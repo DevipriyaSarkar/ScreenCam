@@ -1,4 +1,4 @@
-package com.teapink.screencam;
+package com.teapink.screencam.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,7 +14,9 @@ import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
 import android.widget.Toast;
 
-import static com.teapink.screencam.FilePath.getPath;
+import com.teapink.screencam.R;
+
+import static com.teapink.screencam.utilities.FilePath.getPath;
 
 public class UserSettings extends PreferenceActivity {
 

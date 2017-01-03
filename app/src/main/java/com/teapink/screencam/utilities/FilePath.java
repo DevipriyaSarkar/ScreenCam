@@ -1,4 +1,4 @@
-package com.teapink.screencam;
+package com.teapink.screencam.utilities;
 
 import android.content.ContentUris;
 import android.content.Context;
@@ -9,8 +9,7 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
-
-class FilePath {
+public class FilePath {
 
     public static String getPath(final Context context, final Uri uri) {
 

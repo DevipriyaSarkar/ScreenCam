@@ -1,4 +1,4 @@
-package com.teapink.screencam;
+package com.teapink.screencam.activities;
 
 import android.Manifest;
 import android.content.Context;
@@ -31,6 +31,8 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import com.teapink.screencam.R;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,9 +20,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UserSettings"
+            android:name=".activities.UserSettings"
             android:label="@string/title_user_settings" >
         </activity>
+        <service
+            android:name=".services.ScreenRecorderService"
+            android:exported="false" />
     </application>
 
 </manifest>
