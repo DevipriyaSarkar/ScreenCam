@@ -12,6 +12,7 @@ import android.hardware.display.VirtualDisplay;
 import android.media.MediaRecorder;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -34,6 +35,7 @@ import android.widget.ToggleButton;
 
 import com.teapink.screencam.R;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private ToggleButton mToggleButton;
     private MediaRecorder mMediaRecorder;
     private TextView textView;
+    private String filePath;
 
     private int hasPermissionStorage;
     private int hasPermissionAudio;
@@ -186,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
         mVirtualDisplay.release();
         //mMediaRecorder.release();
         textView.setText("");
+        addVideoToGallery();
     }
 
     private VirtualDisplay createVirtualDisplay() {
@@ -303,6 +307,7 @@ public class MainActivity extends AppCompatActivity {
         mMediaRecorder.setVideoFrameRate(Integer.parseInt(frameRate));
         mMediaRecorder.setVideoSize(DISPLAY_WIDTH, DISPLAY_HEIGHT);
         mMediaRecorder.setOutputFile(path+"/"+mName);
+        filePath = path + "/" + mName;
     }
 
     @Override
@@ -359,5 +364,13 @@ public class MainActivity extends AppCompatActivity {
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
             }
         }
+    }
+
+    private void addVideoToGallery() {
+        Intent mediaScanIntent = new Intent("android.intent.action.MEDIA_SCANNER_SCAN_FILE");
+        File f = new File(filePath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
     }
 }
